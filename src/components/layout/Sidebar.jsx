@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, CheckSquare, Calendar, Settings, LogOut, Menu, X } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, CheckSquare, Calendar, Settings, LogOut, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
         { icon: CheckSquare, label: 'My Tasks', path: '/tasks' },
@@ -11,9 +14,13 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         { icon: Settings, label: 'Settings', path: '/settings' },
     ];
 
-    const sidebarVariants = {
-        open: { x: 0, opacity: 1 },
-        closed: { x: '-100%', opacity: 0 },
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate('/auth');
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
     };
 
     return (
@@ -69,7 +76,10 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 
                     {/* Footer Actions */}
                     <div className="p-4 border-t border-white/5">
-                        <button className="flex w-full items-center gap-3 px-4 py-3 text-brand-error hover:bg-brand-error/10 rounded-xl transition-colors">
+                        <button
+                            onClick={handleLogout}
+                            className="flex w-full items-center gap-3 px-4 py-3 text-brand-error hover:bg-brand-error/10 rounded-xl transition-colors"
+                        >
                             <LogOut size={20} />
                             <span className="font-medium">Sign Out</span>
                         </button>
@@ -79,3 +89,4 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         </>
     );
 }
+

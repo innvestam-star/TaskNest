@@ -1,8 +1,8 @@
 import { useState } from 'react';
-// eslint-disable-next-line no-unused-vars
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, User, Chrome, CheckCircle2 } from 'lucide-react';
+import { Mail, Lock, User, Chrome, CheckCircle2, AlertCircle } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../../components/ui/Card';
@@ -10,18 +10,73 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 export default function Auth() {
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login, signup, loginWithGoogle } = useAuth();
 
-    const toggleMode = () => setIsLogin(!isLogin);
+    // Form state
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const toggleMode = () => {
+        setIsLogin(!isLogin);
+        setError('');
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setIsLoading(false);
+
+        try {
+            if (isLogin) {
+                await login(email, password);
+            } else {
+                if (!name.trim()) {
+                    throw new Error('Please enter your name');
+                }
+                await signup(name, email, password);
+            }
             navigate('/');
-        }, 2000);
+        } catch (err) {
+            console.error('Auth error:', err);
+            // Handle Firebase error messages
+            switch (err.code) {
+                case 'auth/email-already-in-use':
+                    setError('This email is already registered');
+                    break;
+                case 'auth/invalid-email':
+                    setError('Invalid email address');
+                    break;
+                case 'auth/weak-password':
+                    setError('Password should be at least 6 characters');
+                    break;
+                case 'auth/user-not-found':
+                case 'auth/wrong-password':
+                case 'auth/invalid-credential':
+                    setError('Invalid email or password');
+                    break;
+                default:
+                    setError(err.message || 'An error occurred');
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        setError('');
+        setIsLoading(true);
+        try {
+            await loginWithGoogle();
+            navigate('/');
+        } catch (err) {
+            console.error('Google login error:', err);
+            setError('Google sign-in failed. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -46,6 +101,17 @@ export default function Auth() {
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
+                        {error && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="mb-4 p-3 rounded-lg bg-brand-error/10 border border-brand-error/20 flex items-center gap-2 text-brand-error text-sm"
+                            >
+                                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                                <span>{error}</span>
+                            </motion.div>
+                        )}
+
                         <AnimatePresence mode="wait">
                             <motion.form
                                 key={isLogin ? 'login' : 'signup'}
@@ -61,7 +127,14 @@ export default function Auth() {
                                         <label className="text-sm font-medium text-brand-text-secondary">Full Name</label>
                                         <div className="relative">
                                             <User className="absolute left-3 top-3 h-5 w-5 text-brand-text-muted" />
-                                            <Input className="pl-10" placeholder="John Doe" type="text" required />
+                                            <Input
+                                                className="pl-10"
+                                                placeholder="John Doe"
+                                                type="text"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                required
+                                            />
                                         </div>
                                     </div>
                                 )}
@@ -70,7 +143,14 @@ export default function Auth() {
                                     <label className="text-sm font-medium text-brand-text-secondary">Email</label>
                                     <div className="relative">
                                         <Mail className="absolute left-3 top-3 h-5 w-5 text-brand-text-muted" />
-                                        <Input className="pl-10" placeholder="name@example.com" type="email" required />
+                                        <Input
+                                            className="pl-10"
+                                            placeholder="name@example.com"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
                                     </div>
                                 </div>
 
@@ -85,7 +165,14 @@ export default function Auth() {
                                     </div>
                                     <div className="relative">
                                         <Lock className="absolute left-3 top-3 h-5 w-5 text-brand-text-muted" />
-                                        <Input className="pl-10" placeholder="••••••••" type="password" required />
+                                        <Input
+                                            className="pl-10"
+                                            placeholder="••••••••"
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
                                     </div>
                                 </div>
 
@@ -113,7 +200,13 @@ export default function Auth() {
                             </div>
                         </div>
 
-                        <Button variant="secondary" className="w-full" type="button">
+                        <Button
+                            variant="secondary"
+                            className="w-full"
+                            type="button"
+                            onClick={handleGoogleLogin}
+                            disabled={isLoading}
+                        >
                             <Chrome className="mr-2 h-4 w-4" />
                             Google
                         </Button>
@@ -134,3 +227,4 @@ export default function Auth() {
         </div>
     );
 }
+

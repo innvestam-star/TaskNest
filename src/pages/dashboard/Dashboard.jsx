@@ -1,8 +1,19 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2, Clock, AlertCircle, Briefcase } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card';
+import { Card, CardContent } from '../../components/ui/Card';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Dashboard() {
+    const { user } = useAuth();
+
+    // Get greeting based on time of day
+    const getGreeting = () => {
+        const hour = new Date().getHours();
+        if (hour < 12) return 'Good Morning';
+        if (hour < 18) return 'Good Afternoon';
+        return 'Good Evening';
+    };
+
     const container = {
         hidden: { opacity: 0 },
         show: {
@@ -40,7 +51,7 @@ export default function Dashboard() {
         >
             {/* Welcome Section */}
             <motion.div variants={item}>
-                <h1 className="text-3xl font-bold text-white mb-2">Good Morning, User</h1>
+                <h1 className="text-3xl font-bold text-white mb-2">{getGreeting()}, {user?.displayName || 'User'}</h1>
                 <p className="text-brand-text-secondary">Here's your daily overview.</p>
             </motion.div>
 
