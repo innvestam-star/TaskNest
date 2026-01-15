@@ -1,0 +1,165 @@
+.container {
+    position: relative;
+}
+
+.bellBtn {
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.bellBtn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+}
+
+.badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    background-color: var(--status-red);
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-primary);
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    width: 360px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.clearBtn {
+    font-size: 0.8rem;
+    color: var(--status-cyan);
+    transition: opacity 0.2s;
+}
+
+.clearBtn:hover {
+    opacity: 0.8;
+}
+
+.list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.item:hover {
+    background-color: var(--bg-card);
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item.read {
+    opacity: 0.6;
+}
+
+.iconWrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.item.overdue .iconWrapper {
+    background-color: var(--status-red-bg);
+    color: var(--status-red);
+}
+
+.item.today .iconWrapper {
+    background-color: var(--status-orange-bg);
+    color: var(--status-orange);
+}
+
+.item.appointment .iconWrapper {
+    background-color: rgba(6, 182, 212, 0.15);
+    color: var(--status-cyan);
+}
+
+.item.completed .iconWrapper {
+    background-color: var(--status-green-bg);
+    color: var(--status-green);
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.message {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.time {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+}

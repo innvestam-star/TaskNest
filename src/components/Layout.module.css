@@ -1,0 +1,105 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100vw - 220px);
+}
+
+.header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.searchBar {
+    position: relative;
+    width: 320px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 0.65rem 1rem 0.65rem 2.75rem;
+    background-color: var(--bg-card);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.searchBar input:focus {
+    border-color: var(--primary);
+}
+
+.searchBar input::placeholder {
+    color: var(--text-muted);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconBtn {
+    position: relative;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: color 0.2s;
+}
+
+.iconBtn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+}
+
+.badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+}
+
+.profileBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    transition: all 0.2s;
+}
+
+.profileBtn:hover {
+    background-color: rgba(139, 92, 246, 0.1);
+}
+
+.content {
+    padding: 0.5rem 2rem 2rem 2rem;
+    flex: 1;
+    overflow-y: auto;
+}

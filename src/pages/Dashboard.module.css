@@ -1,0 +1,232 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.header h1 {
+    display: none;
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Stats Grid - 4 equal columns */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.875rem;
+}
+
+.statCard {
+    background-color: var(--bg-card);
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 72px;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.statLabel {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.statValue {
+    color: var(--text-primary);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Circular ring icons */
+.statIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 2.5px solid currentColor;
+}
+
+/* Section Header */
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sectionHeader h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.viewAllBtn {
+    color: var(--status-cyan);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.viewAllBtn:hover {
+    opacity: 0.8;
+}
+
+.addTaskBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--primary);
+    color: #FFFFFF;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.addTaskBtn:hover {
+    background-color: #7c3aed;
+    transform: translateY(-1px);
+}
+
+/* Task List */
+.taskList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.taskItem {
+    background-color: var(--bg-card);
+    padding: 0.875rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.taskLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+.taskIcon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background-color: rgba(139, 92, 246, 0.12);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.taskInfo h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.15rem;
+}
+
+.taskInfo p {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+}
+
+.dueDateBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-left: 0.4rem;
+}
+
+.priorityBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.taskRight {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.statusBadge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    min-width: 75px;
+    text-align: center;
+}
+
+.editBtn {
+    padding: 0.4rem;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.editBtn:hover {
+    color: var(--primary);
+    background-color: rgba(139, 92, 246, 0.1);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--text-muted);
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+}

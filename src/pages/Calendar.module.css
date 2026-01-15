@@ -1,0 +1,344 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.headerLeft h1 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.headerLeft p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.viewToggle {
+    display: flex;
+    background-color: var(--bg-card);
+    border-radius: 10px;
+    padding: 0.25rem;
+}
+
+.toggleBtn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.toggleBtn:hover {
+    color: var(--text-primary);
+}
+
+.toggleBtn.active {
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navBtn {
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.navBtn:hover {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+}
+
+.currentPeriod {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 280px;
+    text-align: center;
+}
+
+.todayBtn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    margin-left: auto;
+    transition: all 0.2s;
+}
+
+.todayBtn:hover {
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+.legend {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legendDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legendDot.task {
+    background-color: var(--status-purple);
+}
+
+.legendDot.appointment {
+    background-color: var(--status-cyan);
+}
+
+.calendarContent {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.25rem;
+    min-height: 400px;
+}
+
+/* Day View */
+.dayView {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.noEvents {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+}
+
+.eventCard {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 3px solid;
+}
+
+.eventCard.task {
+    background-color: rgba(168, 85, 247, 0.1);
+    border-left-color: var(--status-purple);
+}
+
+.eventCard.appointment {
+    background-color: rgba(6, 182, 212, 0.1);
+    border-left-color: var(--status-cyan);
+}
+
+.eventTime {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    min-width: 70px;
+}
+
+.eventContent h4 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.eventMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Week View */
+.weekView {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekHeader {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.weekDay {
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 10px;
+}
+
+.weekDay.today {
+    background-color: var(--primary);
+}
+
+.dayName {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.weekDay.today .dayName {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dayNumber {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.weekDay.today .dayNumber {
+    color: #FFFFFF;
+}
+
+.weekBody {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    min-height: 300px;
+}
+
+.weekColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.weekEvent {
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+}
+
+.weekEvent.task {
+    background-color: rgba(168, 85, 247, 0.15);
+    color: var(--status-purple);
+}
+
+.weekEvent.appointment {
+    background-color: rgba(6, 182, 212, 0.15);
+    color: var(--status-cyan);
+}
+
+.weekEvent .eventTime {
+    font-size: 0.7rem;
+    display: block;
+    margin-bottom: 0.15rem;
+}
+
+.weekEvent .eventTitle {
+    font-weight: 500;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Month View */
+.monthView {
+    display: flex;
+    flex-direction: column;
+}
+
+.monthHeader {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 0.5rem;
+}
+
+.monthDayName {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+}
+
+.monthGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.monthDay {
+    min-height: 80px;
+    padding: 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.monthDay.otherMonth {
+    opacity: 0.4;
+}
+
+.monthDay.today .monthDayNumber {
+    background-color: var(--primary);
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.monthDayNumber {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.monthEvents {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.monthEvent {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.35rem;
+    border-radius: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.monthEvent.task {
+    background-color: var(--status-purple);
+    color: #FFFFFF;
+}
+
+.monthEvent.appointment {
+    background-color: var(--status-cyan);
+    color: #FFFFFF;
+}
+
+.moreEvents {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    padding: 0.15rem;
+}
