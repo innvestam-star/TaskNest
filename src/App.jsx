@@ -4,6 +4,9 @@ import Dashboard from './pages/Dashboard';
 import Schedule from './pages/Schedule';
 import MyTasks from './pages/MyTasks';
 import Calendar from './pages/Calendar';
+import Settings from './pages/Settings';
+import Booking from './pages/Booking';
+import MeetingNotes from './pages/MeetingNotes';
 import './App.css';
 
 function App() {
@@ -16,7 +19,9 @@ function App() {
           <Route path="my-tasks" element={<MyTasks />} />
           <Route path="schedule" element={<Schedule />} />
           <Route path="calendar" element={<Calendar />} />
-          <Route path="settings" element={<div style={{ padding: '2rem', color: 'var(--text-muted)' }}>Settings page coming soon...</div>} />
+          <Route path="meeting-notes" element={<MeetingNotes />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="booking" element={<Booking />} />
         </Route>
       </Routes>
     </BrowserRouter>

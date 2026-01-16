@@ -1,0 +1,323 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--bg-card);
+    padding: 0.35rem;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    color: var(--text-primary);
+}
+
+.tab.active {
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+.content {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.section h2 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.formGroup input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.7rem 1rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.formGroup input:focus {
+    border-color: var(--primary);
+}
+
+.saveBtn {
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary);
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    transition: all 0.2s;
+}
+
+.saveBtn:hover {
+    background-color: #7c3aed;
+}
+
+/* Toggle Items */
+.toggleItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.toggleItem:last-child {
+    border-bottom: none;
+}
+
+.toggleItem h4 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.toggleItem p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.toggle {
+    width: 48px;
+    height: 26px;
+    background-color: var(--border-color);
+    border-radius: 13px;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.toggle.on {
+    background-color: var(--primary);
+}
+
+.toggleThumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.toggle.on .toggleThumb {
+    transform: translateX(22px);
+}
+
+/* Subscription Plans */
+.planSubtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.planCard {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.planCard:hover {
+    border-color: var(--primary);
+}
+
+.planCard.current {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.planCard.popular {
+    border-color: var(--primary);
+}
+
+.popularBadge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary), #06B6D4);
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.planIcon {
+    margin-bottom: 1rem;
+}
+
+.planCard h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.planPrice {
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.period {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.features {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.features li svg {
+    color: var(--status-green);
+}
+
+.planBtn {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.planBtn:hover {
+    opacity: 0.9;
+}
+
+.planBtn.currentBtn {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Security */
+.securityItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.securityItem:last-child {
+    border-bottom: none;
+}
+
+.securityItem h4 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.securityItem p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.actionBtn {
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.actionBtn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.dangerBtn {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid var(--status-red);
+    color: var(--status-red);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.dangerBtn:hover {
+    background-color: var(--status-red);
+    color: #FFFFFF;
+}
+
+@media (max-width: 900px) {
+    .plans {
+        grid-template-columns: 1fr;
+    }
+}

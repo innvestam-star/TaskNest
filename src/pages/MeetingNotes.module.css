@@ -1,0 +1,1054 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Main Layout - Sidebar + Content */
+.mainLayout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 1.5rem;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Projects Sidebar */
+.projectsSidebar {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 200px);
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebarHeader h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.addProjectBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), #9333EA);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.addProjectBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.loadingState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.emptyProjects {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+}
+
+.emptyProjects svg {
+    opacity: 0.4;
+    margin-bottom: 0.75rem;
+}
+
+.emptyProjects p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.emptyProjects button {
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary), #9333EA);
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.emptyProjects button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.projectsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.projectCard {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.projectCard:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.projectCard.selected {
+    background-color: var(--primary-glow);
+    border-color: var(--project-color, var(--primary));
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.projectIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.projectInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.projectInfo h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.projectInfo span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.projectDeleteBtn {
+    padding: 0.35rem;
+    color: var(--text-muted);
+    border-radius: 6px;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.projectCard:hover .projectDeleteBtn {
+    opacity: 1;
+}
+
+.projectDeleteBtn:hover {
+    color: var(--status-red);
+    background-color: var(--status-red-bg);
+}
+
+/* Main Content Area */
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 0;
+}
+
+/* Recording Panel */
+.recordingPanel {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.recorder {
+    display: flex;
+    justify-content: center;
+}
+
+.recordBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 3rem;
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+    color: #FFFFFF;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+}
+
+.recordBtn:disabled {
+    background: linear-gradient(135deg, #6B7280, #4B5563);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.recordBtn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(239, 68, 68, 0.5);
+}
+
+.recordingControls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.recordingIndicator {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.recordingDot {
+    width: 12px;
+    height: 12px;
+    background-color: #EF4444;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.recordingDot.paused {
+    animation: none;
+    background-color: var(--status-orange);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+.recordingTime {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.recordingLabel {
+    font-size: 0.9rem;
+    color: var(--status-red);
+}
+
+.recordingDot.paused+.recordingTime+.recordingLabel {
+    color: var(--status-orange);
+}
+
+.followUpBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    background-color: var(--primary-glow);
+    color: var(--primary);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.controlBtns {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.pauseBtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.pauseBtn:hover {
+    background-color: var(--primary);
+}
+
+.stopBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--status-red);
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.stopBtn:hover {
+    opacity: 0.9;
+}
+
+.liveTranscript {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 10px;
+    border-left: 3px solid var(--primary);
+}
+
+.liveTranscript h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.liveTranscript p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* No Project Selected State */
+.noProjectSelected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    color: var(--text-muted);
+}
+
+.noProjectSelected svg {
+    opacity: 0.3;
+    margin-bottom: 1rem;
+}
+
+.noProjectSelected h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.noProjectSelected p {
+    font-size: 0.9rem;
+    max-width: 300px;
+}
+
+/* Notes Section */
+.notesSection {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.notesHeader {
+    margin-bottom: 1rem;
+}
+
+.notesHeader h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.projectBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.notesGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+}
+
+.notesList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    color: var(--text-muted);
+}
+
+.emptyState svg {
+    opacity: 0.3;
+    margin-bottom: 1rem;
+}
+
+.emptyState p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.emptyState span {
+    font-size: 0.8rem;
+}
+
+/* Meeting Item with Follow-up Connector */
+.meetingItem {
+    position: relative;
+}
+
+.followUpConnector {
+    position: absolute;
+    left: 16px;
+    top: -12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary);
+}
+
+.followUpConnector::before {
+    content: '';
+    width: 2px;
+    height: 10px;
+    background: linear-gradient(180deg, transparent, var(--primary));
+}
+
+.noteCard {
+    background-color: var(--bg-card);
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.noteCard:hover {
+    border-color: var(--primary);
+}
+
+.noteCard.selected {
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.noteHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.noteHeader h4 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.noteActions {
+    display: flex;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.noteCard:hover .noteActions {
+    opacity: 1;
+}
+
+.followUpBtn {
+    padding: 0.25rem;
+    color: var(--primary);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.followUpBtn:hover {
+    background-color: var(--primary-glow);
+}
+
+.deleteBtn {
+    padding: 0.25rem;
+    color: var(--text-muted);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+    color: var(--status-red);
+    background-color: var(--status-red-bg);
+}
+
+.noteMeta {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.noteMeta span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.followUpTag {
+    background-color: var(--primary-glow);
+    color: var(--primary) !important;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+}
+
+.notePreview {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Note Detail Panel */
+.noteDetail {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.detailHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.detailHeader h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.detailActions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editBtn {
+    padding: 0.35rem;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.editBtn:hover {
+    color: var(--primary);
+    background-color: var(--primary-glow);
+}
+
+.closeBtn {
+    padding: 0.25rem;
+    color: var(--text-secondary);
+    border-radius: 4px;
+}
+
+.closeBtn:hover {
+    color: var(--text-primary);
+}
+
+.detailMeta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detailMeta span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.viewToggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.toggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    transition: all 0.2s;
+}
+
+.toggleBtn.active {
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+.detailContent {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 150px;
+}
+
+.transcriptView p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.audioView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.audioPlayer {
+    width: 100%;
+    max-width: 400px;
+}
+
+.audioPlaceholder {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Modals */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal {
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 1.75rem;
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid var(--border-color);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal h3 {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+.projectTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.followUpNote {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    background-color: var(--primary-glow);
+    color: var(--primary);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    border-color: var(--primary);
+}
+
+.formGroup textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Color & Icon Pickers */
+.colorPicker {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.colorOption {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.colorOption:hover {
+    transform: scale(1.1);
+}
+
+.colorOption.selected {
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.iconPicker {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.iconOption {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--bg-card);
+    font-size: 1.25rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.iconOption:hover {
+    background-color: var(--bg-secondary);
+}
+
+.iconOption.selected {
+    border-color: var(--primary);
+    background-color: var(--primary-glow);
+}
+
+.recordingInfo {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+}
+
+.recordingInfo span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.modalActions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.cancelBtn {
+    flex: 1;
+    padding: 0.8rem;
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+    color: var(--text-primary);
+}
+
+.saveBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, var(--primary), #9333EA);
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.saveBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.saveBtn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+/* Delete Modal */
+.deleteModal {
+    text-align: center;
+}
+
+.deleteIcon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    background-color: var(--status-red-bg);
+    color: var(--status-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteModal h3 {
+    margin-bottom: 0.75rem;
+}
+
+.deleteModal p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.deleteWarning {
+    display: block;
+    color: var(--status-red);
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.deleteConfirmBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.8rem;
+    background-color: var(--status-red);
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.deleteConfirmBtn:disabled {
+    opacity: 0.6;
+}
+
+.deleteConfirmBtn:not(:disabled):hover {
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .mainLayout {
+        grid-template-columns: 240px 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .mainLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .projectsSidebar {
+        max-height: none;
+    }
+
+    .projectsList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .projectCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .projectDeleteBtn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        opacity: 1;
+    }
+
+    .notesGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .recordBtn {
+        padding: 1.5rem 2rem;
+    }
+
+    .colorPicker,
+    .iconPicker {
+        gap: 0.4rem;
+    }
+
+    .colorOption {
+        width: 28px;
+        height: 28px;
+    }
+
+    .iconOption {
+        width: 36px;
+        height: 36px;
+    }
+}

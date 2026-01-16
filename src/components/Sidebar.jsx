@@ -1,4 +1,4 @@
-import { LayoutDashboard, CheckSquare, Calendar, CalendarDays, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, CheckSquare, Calendar, CalendarDays, Mic, Settings, LogOut } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 
@@ -8,6 +8,7 @@ const Sidebar = () => {
         { icon: CheckSquare, label: 'My Tasks', path: '/my-tasks' },
         { icon: Calendar, label: 'Schedule', path: '/schedule' },
         { icon: CalendarDays, label: 'Calendar', path: '/calendar' },
+        { icon: Mic, label: 'Meeting Notes', path: '/meeting-notes' },
         { icon: Settings, label: 'Settings', path: '/settings' },
     ];
 
