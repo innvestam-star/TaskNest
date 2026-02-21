@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3B82F6;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #64748B;
+  --color-secondary-foreground: #FFFFFF;
+  --color-accent: #F59E0B;
+  --color-accent-foreground: #FFFFFF;
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+
+  --color-muted: #94A3B8;
+  --color-muted-foreground: #FFFFFF;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+    --border: #E2E8F0;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+  }
+
+  :root.dark {
+    --background: #020617;
+    /* Deep Slate 950 */
+    --surface: #0B1120;
+    /* Premium Slate 900+ */
+    --border: #1E293B;
+    /* Slate 800 */
+    --text-main: #F1F5F9;
+    /* Slate 100 */
+    --text-muted: #94A3B8;
+    /* Slate 400 */
+  }
+
+  body {
+    @apply bg-background text-[var(--text-main)] font-sans antialiased transition-colors duration-500 selection:bg-primary/30;
+  }
+
+  /* Electric Utility Classes */
+  .glow-blue {
+    box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.4);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 30px -5px var(--color-primary);
+  }
+
+  .text-gradient-electric {
+    @apply bg-gradient-to-br from-white via-white to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .electric-card {
+    @apply transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1;
+  }
+
+  .glass-panel {
+    @apply bg-surface/80 backdrop-blur-xl border border-border;
+  }
+
+  /* Robust Dark Mode Overrides */
+  .dark {
+    color-scheme: dark;
+  }
+
+  /* Backgrounds */
+  .dark .bg-white,
+  .dark .bg-white\/50,
+  .dark .bg-gray-50,
+  .dark .bg-slate-50,
+  .dark .bg-gray-50\/50 {
+    @apply bg-surface;
+  }
+
+  .dark .bg-gray-100,
+  .dark .bg-slate-100 {
+    @apply bg-slate-800/40 transition-colors duration-200;
+  }
+
+  .dark .bg-background\/50 {
+    @apply bg-background/80 backdrop-blur-md;
+  }
+
+  /* Borders */
+  .dark .border-gray-50,
+  .dark .border-gray-100,
+  .dark .border-gray-200,
+  .dark .border-slate-100,
+  .dark .border-slate-200 {
+    @apply border-border;
+  }
+
+  /* Text Colors */
+  .dark .text-gray-900,
+  .dark .text-slate-900,
+  .dark .text-gray-800,
+  .dark .text-slate-800,
+  .dark .text-gray-950,
+  .dark .text-slate-950 {
+    @apply text-white;
+  }
+
+  .dark .text-gray-500,
+  .dark .text-gray-600,
+  .dark .text-slate-500,
+  .dark .text-slate-600 {
+    @apply text-[var(--text-muted)];
+  }
+
+  .dark .text-gray-700,
+  .dark .text-slate-700 {
+    @apply text-slate-300;
+  }
+
+  /* Interaction & States */
+  .dark .hover\:bg-gray-50:hover,
+  .dark .hover\:bg-slate-50:hover {
+    @apply hover:bg-slate-800/50;
+  }
+
+  .dark .bg-primary\/5 {
+    @apply bg-primary/10;
+  }
+
+  /* Forms */
+  .dark input,
+  .dark select,
+  .dark textarea {
+    @apply bg-slate-900/50 border-border text-white placeholder-slate-500 focus:ring-primary/20 focus:border-primary;
+  }
+
+  .dark select option {
+    @apply bg-slate-900 text-white;
+  }
+
+  /* Tables */
+  .dark table thead tr {
+    @apply bg-slate-900/50;
+  }
+
+  /* Transition for all theme-affected properties */
+  * {
+    @apply transition-colors duration-200;
+  }
+}

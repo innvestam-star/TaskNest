@@ -1,0 +1,93 @@
+<svg
+  width="320"
+  height="80"
+  viewBox="0 0 320 80"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="TaskNest Logo"
+>
+  <!-- Icon group -->
+  <g transform="translate(2, 2) scale(0.76)">
+    <!-- Calendar Body -->
+    <rect
+      x="12" y="18"
+      width="56" height="50"
+      rx="10" ry="10"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="5"
+    />
+
+    <!-- Calendar Top Bar -->
+    <rect x="12" y="18" width="56" height="16" rx="10" ry="10" fill="#FFFFFF"/>
+
+    <!-- Calendar Rings -->
+    <rect x="24" y="10" width="6" height="16" rx="3" fill="#FFFFFF"/>
+    <rect x="37" y="10" width="6" height="16" rx="3" fill="#FFFFFF"/>
+    <rect x="50" y="10" width="6" height="16" rx="3" fill="#FFFFFF"/>
+
+    <!-- Bold Checkmark -->
+    <path
+      d="M26 48 L36 58 L56 36"
+      stroke="#FFFFFF"
+      stroke-width="7"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Left leaf/feather accent -->
+    <path
+      d="M8 50 C4 60, 6 72, 14 68"
+      stroke="#FFFFFF"
+      stroke-width="3.5"
+      fill="none"
+      stroke-linecap="round"
+    />
+
+    <!-- Right leaf accent -->
+    <path
+      d="M72 42 C78 52, 76 66, 68 64"
+      stroke="#FFFFFF"
+      stroke-width="3.5"
+      fill="none"
+      stroke-linecap="round"
+    />
+
+    <!-- Nest curves -->
+    <path
+      d="M4 72 C18 96, 62 96, 76 72"
+      stroke="#FFFFFF"
+      stroke-width="5"
+      fill="none"
+      stroke-linecap="round"
+    />
+    <path
+      d="M10 80 C22 98, 58 98, 70 80"
+      stroke="#FFFFFF"
+      stroke-width="4"
+      fill="none"
+      stroke-linecap="round"
+      opacity="0.75"
+    />
+    <path
+      d="M16 86 C28 100, 52 100, 64 86"
+      stroke="#FFFFFF"
+      stroke-width="3"
+      fill="none"
+      stroke-linecap="round"
+      opacity="0.5"
+    />
+  </g>
+
+  <!-- TaskNest Text -->
+  <text
+    x="80"
+    y="52"
+    font-size="38"
+    font-weight="700"
+    font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fill="#FFFFFF"
+    letter-spacing="-0.5"
+  >TaskNest</text>
+</svg>
