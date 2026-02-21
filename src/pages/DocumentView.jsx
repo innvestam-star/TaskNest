@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Download, Printer, Send, CheckCircle, XCircle, Edit, Phone, User, Mail } from 'lucide-react';
+import { ArrowLeft, Download, Printer, Send, CheckCircle, XCircle, Edit, Phone, User, Mail, MapPin } from 'lucide-react';
 import { getDocument, updateDocumentStatus } from '../services/billingService';
 import { useSubscription } from '../context/SubscriptionContext';
 import { useAuth } from '../context/AuthContext';
@@ -165,108 +165,128 @@ export default function DocumentView() {
                             </span>
                         </div>
 
-                        {/* Document Header */}
-                        <div className="flex justify-between items-start mb-12">
-                            <div className="flex-1">
+                        {/* Document Header — Logo + Type */}
+                        <div className="flex justify-between items-start mb-10">
+                            <div>
                                 {/* Business Logo */}
                                 {logoSrc ? (
-                                    <div className="mb-5">
-                                        <img
-                                            src={logoSrc}
-                                            alt={businessName}
-                                            className="h-20 w-auto max-w-[280px] object-contain"
-                                            onError={(e) => {
-                                                console.warn('Logo failed to load');
-                                                e.target.style.display = 'none';
-                                                const fallback = e.target.nextElementSibling;
-                                                if (fallback) fallback.style.display = 'flex';
-                                            }}
-                                        />
-                                        {/* Fallback text logo (hidden unless img fails) */}
-                                        <div className="text-2xl font-black text-slate-900 items-center gap-3 mb-1" style={{ display: 'none' }}>
-                                            <div className="w-11 h-11 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white text-base font-bold shadow-lg shadow-blue-500/20">
-                                                {businessName[0] || 'T'}
-                                            </div>
-                                            <span>{businessName}</span>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="flex text-2xl font-black text-slate-900 items-center gap-3 mb-5">
-                                        <div className="w-11 h-11 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white text-base font-bold shadow-lg shadow-blue-500/20">
+                                    <img
+                                        src={logoSrc}
+                                        alt={businessName}
+                                        className="h-16 w-auto max-w-[220px] object-contain"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            const fallback = e.target.nextElementSibling;
+                                            if (fallback) fallback.style.display = 'flex';
+                                        }}
+                                    />
+                                ) : null}
+                                {/* Fallback text logo */}
+                                {!logoSrc && (
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-blue-500/20">
                                             {businessName[0] || 'T'}
                                         </div>
-                                        <span className="tracking-tight">{businessName}</span>
+                                        <span className="text-xl font-black text-slate-900 tracking-tight">{businessName}</span>
                                     </div>
                                 )}
-
-                                {/* Business Address & Contact */}
-                                {businessAddress && (
-                                    <div className="text-slate-500 text-[13px] whitespace-pre-line leading-relaxed mb-3">
-                                        {businessAddress}
-                                    </div>
-                                )}
-                                <div className="space-y-1">
-                                    {contactPerson && (
-                                        <div className="flex items-center gap-2 text-[13px] text-slate-600">
-                                            <User className="w-3.5 h-3.5 text-blue-400" />
-                                            <span className="font-medium">{contactPerson}</span>
-                                        </div>
-                                    )}
-                                    {contactNumber && (
-                                        <div className="flex items-center gap-2 text-[13px] text-slate-600">
-                                            <Phone className="w-3.5 h-3.5 text-blue-400" />
-                                            <span className="font-medium">{contactNumber}</span>
-                                        </div>
-                                    )}
-                                    {businessEmail && (
-                                        <div className="flex items-center gap-2 text-[13px] text-slate-600">
-                                            <Mail className="w-3.5 h-3.5 text-blue-400" />
-                                            <span className="font-medium">{businessEmail}</span>
-                                        </div>
-                                    )}
-                                </div>
                             </div>
-                            <div className="text-right flex-shrink-0 ml-10">
-                                <h1 className="text-4xl font-extrabold text-gray-900 uppercase tracking-wider mb-5">
-                                    {document.type}
-                                </h1>
-                                <div className="text-[13px] leading-relaxed space-y-1.5">
-                                    <div className="flex justify-end gap-3">
-                                        <span className="text-gray-400 font-medium">Number</span>
-                                        <span className="text-gray-900 font-bold w-36 text-right">{document.number}</span>
-                                    </div>
-                                    <div className="flex justify-end gap-3">
-                                        <span className="text-gray-400 font-medium">Date</span>
-                                        <span className="text-gray-900 font-bold w-36 text-right">{new Date(document.date).toLocaleDateString()}</span>
-                                    </div>
-                                    <div className="flex justify-end gap-3">
-                                        <span className="text-gray-400 font-medium">{document.type === 'quote' ? 'Valid Until' : 'Due Date'}</span>
-                                        <span className="text-gray-900 font-bold w-36 text-right">{new Date(document.dueDate || document.validUntil).toLocaleDateString()}</span>
-                                    </div>
-                                    <div className="flex justify-end gap-3">
-                                        <span className="text-gray-400 font-medium">Currency</span>
-                                        <span className="text-gray-900 font-bold w-36 text-right">{cur}</span>
-                                    </div>
-                                </div>
+                            <div className="text-right">
+                                <h1 className="text-3xl font-black text-gray-900 uppercase tracking-wider">{document.type}</h1>
+                                <p className="text-sm text-gray-400 font-bold mt-1 tracking-wide">#{document.number}</p>
                             </div>
                         </div>
 
-                        {/* Divider */}
-                        <div className="border-t border-gray-100 mb-10" />
+                        {/* Document Meta Grid */}
+                        <div className="grid grid-cols-4 gap-px bg-gray-100 rounded-lg overflow-hidden mb-10">
+                            <div className="bg-white px-4 py-3">
+                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Issue Date</p>
+                                <p className="text-sm font-bold text-gray-800">{new Date(document.date).toLocaleDateString()}</p>
+                            </div>
+                            <div className="bg-white px-4 py-3">
+                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{document.type === 'quote' ? 'Valid Until' : 'Due Date'}</p>
+                                <p className="text-sm font-bold text-gray-800">{new Date(document.dueDate || document.validUntil).toLocaleDateString()}</p>
+                            </div>
+                            <div className="bg-white px-4 py-3">
+                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Currency</p>
+                                <p className="text-sm font-bold text-gray-800">{cur}</p>
+                            </div>
+                            <div className="bg-white px-4 py-3">
+                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Status</p>
+                                <p className={`text-sm font-bold capitalize ${document.status === 'paid' || document.status === 'accepted' ? 'text-green-600' :
+                                    document.status === 'overdue' || document.status === 'rejected' ? 'text-red-600' :
+                                        document.status === 'draft' ? 'text-gray-400' : 'text-blue-600'}`}>{document.status}</p>
+                            </div>
+                        </div>
 
-                        {/* Bill To */}
-                        <div className="mb-12 bg-slate-50/70 border border-slate-100 rounded-xl p-5 max-w-xs">
-                            <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3">
-                                Bill To
-                            </h3>
-                            <div className="text-gray-900 font-bold text-base">{document.clientName}</div>
-                            <div className="text-gray-500 text-[13px] mt-1">{document.clientEmail}</div>
-                            {document.clientPhone && (
-                                <div className="flex items-center gap-1.5 text-[13px] text-gray-500 mt-1">
-                                    <Phone className="w-3 h-3 text-gray-400" />
-                                    <span>{document.clientPhone}</span>
+                        {/* From & Bill To — Consistent Side-by-Side Cards */}
+                        <div className="grid grid-cols-2 gap-6 mb-12">
+                            {/* FROM — Company Information */}
+                            <div className="bg-slate-50/80 border border-slate-100 rounded-xl p-5 relative group">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">From</h3>
+                                    <Link
+                                        to="/settings"
+                                        className="p-1.5 text-slate-300 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-all opacity-0 group-hover:opacity-100 print:hidden"
+                                        title="Edit Business Information"
+                                    >
+                                        <Edit className="w-3.5 h-3.5" />
+                                    </Link>
                                 </div>
-                            )}
+                                <p className="text-[15px] font-bold text-slate-900 mb-2">{businessName}</p>
+                                {businessAddress && (
+                                    <p className="text-[12px] text-slate-500 whitespace-pre-line leading-relaxed mb-3">{businessAddress}</p>
+                                )}
+                                <div className="space-y-1.5">
+                                    {contactPerson && (
+                                        <div className="flex items-center gap-2 text-[12px] text-slate-500">
+                                            <User className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                                            <span>{contactPerson}</span>
+                                        </div>
+                                    )}
+                                    {contactNumber && (
+                                        <div className="flex items-center gap-2 text-[12px] text-slate-500">
+                                            <Phone className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                                            <span>{contactNumber}</span>
+                                        </div>
+                                    )}
+                                    {businessEmail && (
+                                        <div className="flex items-center gap-2 text-[12px] text-slate-500">
+                                            <Mail className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                                            <span>{businessEmail}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* BILL TO — Client Information */}
+                            <div className="bg-slate-50/80 border border-slate-100 rounded-xl p-5">
+                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Bill To</h3>
+                                <p className="text-[15px] font-bold text-slate-900 mb-2">{document.clientName}</p>
+                                {document.clientAddress && (
+                                    <p className="text-[12px] text-slate-500 whitespace-pre-line leading-relaxed mb-3">{document.clientAddress}</p>
+                                )}
+                                <div className="space-y-1.5">
+                                    {document.clientContactPerson && (
+                                        <div className="flex items-center gap-2 text-[12px] text-slate-500">
+                                            <User className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                                            <span>{document.clientContactPerson}</span>
+                                        </div>
+                                    )}
+                                    {document.clientPhone && (
+                                        <div className="flex items-center gap-2 text-[12px] text-slate-500">
+                                            <Phone className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                                            <span>{document.clientPhone}</span>
+                                        </div>
+                                    )}
+                                    {document.clientEmail && (
+                                        <div className="flex items-center gap-2 text-[12px] text-slate-500">
+                                            <Mail className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                                            <span>{document.clientEmail}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
 
                         {/* Line Items */}

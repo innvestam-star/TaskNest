@@ -26,6 +26,8 @@ export default function CreateDocument() {
     const [clientName, setClientName] = useState('');
     const [clientEmail, setClientEmail] = useState('');
     const [clientPhone, setClientPhone] = useState('');
+    const [clientContactPerson, setClientContactPerson] = useState('');
+    const [clientAddress, setClientAddress] = useState('');
     const [issueDate, setIssueDate] = useState(getDefaultDate(0));
     const [dueDate, setDueDate] = useState(isEditMode ? '' : getDefaultDate(documentType === 'quote' ? 7 : 14));
     const [items, setItems] = useState([
@@ -99,6 +101,8 @@ export default function CreateDocument() {
                 setClientName(client.name);
                 setClientEmail(client.email);
                 setClientPhone(client.phone || '');
+                setClientContactPerson(client.contactPerson || '');
+                setClientAddress(client.address || '');
                 setSelectedClientId(client.id);
                 if (client.currency) setCurrency(client.currency);
             }
@@ -125,6 +129,8 @@ export default function CreateDocument() {
                 setClientName(doc.clientName || '');
                 setClientEmail(doc.clientEmail || '');
                 setClientPhone(doc.clientPhone || '');
+                setClientContactPerson(doc.clientContactPerson || '');
+                setClientAddress(doc.clientAddress || '');
                 setIssueDate(doc.date || getDefaultDate(0));
                 setDueDate(doc.dueDate || doc.validUntil || '');
                 setItems(doc.items?.length ? doc.items.map(i => ({ ...i, taxRate: i.taxRate || 0 })) : [{ description: '', qty: 1, price: 0, taxRate: 0 }]);
@@ -216,6 +222,8 @@ export default function CreateDocument() {
                 clientName,
                 clientEmail,
                 clientPhone,
+                clientContactPerson,
+                clientAddress,
                 date: issueDate,
                 dueDate,
                 items,
@@ -347,6 +355,39 @@ export default function CreateDocument() {
                                         placeholder="client@example.com"
                                         value={clientEmail}
                                         onChange={e => setClientEmail(e.target.value)}
+                                    />
+                                </div>
+                                {/* Contact Person */}
+                                <div>
+                                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 ml-1">Contact Person</label>
+                                    <input
+                                        type="text"
+                                        className="w-full px-4 py-3.5 bg-[#F8FAFC] dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium focus:border-blue-400 focus:ring-4 focus:ring-blue-50 outline-none transition-all text-slate-900 dark:text-white placeholder-slate-400"
+                                        placeholder="e.g. Jane Smith"
+                                        value={clientContactPerson}
+                                        onChange={e => setClientContactPerson(e.target.value)}
+                                    />
+                                </div>
+                                {/* Client Phone */}
+                                <div>
+                                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 ml-1">Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        className="w-full px-4 py-3.5 bg-[#F8FAFC] dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium focus:border-blue-400 focus:ring-4 focus:ring-blue-50 outline-none transition-all text-slate-900 dark:text-white placeholder-slate-400"
+                                        placeholder="e.g. +27 82 000 0000"
+                                        value={clientPhone}
+                                        onChange={e => setClientPhone(e.target.value)}
+                                    />
+                                </div>
+                                {/* Client Address */}
+                                <div className="md:col-span-2">
+                                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 ml-1">Billing Address</label>
+                                    <textarea
+                                        className="w-full px-4 py-3.5 bg-[#F8FAFC] dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-medium focus:border-blue-400 focus:ring-4 focus:ring-blue-50 outline-none transition-all text-slate-900 dark:text-white placeholder-slate-400 resize-none"
+                                        rows="2"
+                                        placeholder="e.g. 123 Main Street, Cape Town, 8001"
+                                        value={clientAddress}
+                                        onChange={e => setClientAddress(e.target.value)}
                                     />
                                 </div>
                                 {/* Issue Date */}
@@ -665,6 +706,8 @@ export default function CreateDocument() {
                                             setClientName(client.name);
                                             setClientEmail(client.email);
                                             setClientPhone(client.phone || '');
+                                            setClientContactPerson(client.contactPerson || '');
+                                            setClientAddress(client.address || '');
                                             setSelectedClientId(client.id);
                                             if (client.currency) setCurrency(client.currency);
                                             setIsClientModalOpen(false);

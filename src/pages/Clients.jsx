@@ -25,6 +25,7 @@ export default function Clients() {
     const [formData, setFormData] = useState({
         type: 'business',
         name: '',
+        contactPerson: '',
         email: '',
         phone: '',
         address: '',
@@ -58,6 +59,7 @@ export default function Clients() {
             setFormData({
                 type: 'business',
                 name: '',
+                contactPerson: '',
                 email: '',
                 phone: '',
                 address: '',
@@ -235,6 +237,14 @@ export default function Clients() {
                                         </div>
 
                                         <div className="space-y-6 mb-10 border-y border-border/10 py-8">
+                                            {selectedClient.contactPerson && (
+                                                <div className="flex items-center gap-4 group">
+                                                    <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center border border-border/20 group-hover:border-primary/50 transition-colors">
+                                                        <User className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
+                                                    </div>
+                                                    <span className="text-sm font-bold text-text-main">{selectedClient.contactPerson}</span>
+                                                </div>
+                                            )}
                                             <div className="flex items-center gap-4 group">
                                                 <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center border border-border/20 group-hover:border-primary/50 transition-colors">
                                                     <Mail className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
@@ -255,6 +265,14 @@ export default function Clients() {
                                                         <MapPin className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
                                                     </div>
                                                     <span className="text-sm font-bold text-text-main leading-relaxed">{selectedClient.address}</span>
+                                                </div>
+                                            )}
+                                            {selectedClient.notes && (
+                                                <div className="flex items-start gap-4 group">
+                                                    <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center border border-border/20 group-hover:border-primary/50 transition-colors flex-shrink-0">
+                                                        <FileText className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
+                                                    </div>
+                                                    <span className="text-sm text-text-muted leading-relaxed italic">{selectedClient.notes}</span>
                                                 </div>
                                             )}
                                         </div>
@@ -306,9 +324,9 @@ export default function Clients() {
                             <div className="p-10 border-b border-border/20 flex items-center justify-between bg-surface/80 backdrop-blur-md">
                                 <div>
                                     <h3 className="text-2xl font-black text-text-main tracking-tighter">
-                                        {editingClient ? 'Sync Client Data' : 'Establish New Client'}
+                                        {editingClient ? 'Edit Client' : 'Add New Client'}
                                     </h3>
-                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Registry Update</p>
+                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Client Information</p>
                                 </div>
                                 <button onClick={() => setShowModal(false)} className="p-3 text-slate-500 hover:text-primary hover:bg-primary/5 rounded-2xl transition-all">
                                     <X className="w-6 h-6" />
@@ -339,57 +357,90 @@ export default function Clients() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Identifier Name</label>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">{formData.type === 'business' ? 'Company Name' : 'Full Name'}</label>
                                         <input
                                             type="text"
                                             className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all"
-                                            placeholder={formData.type === 'business' ? 'Legal Entity Name' : 'Full Professional Name'}
+                                            placeholder={formData.type === 'business' ? 'e.g. Acme Corporation' : 'e.g. John Doe'}
                                             value={formData.name}
                                             onChange={e => setFormData({ ...formData, name: e.target.value })}
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Digital Correspondence</label>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Contact Person</label>
+                                        <input
+                                            type="text"
+                                            className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all"
+                                            placeholder="e.g. Jane Smith"
+                                            value={formData.contactPerson}
+                                            onChange={e => setFormData({ ...formData, contactPerson: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Email Address</label>
                                         <input
                                             type="email"
                                             className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all"
-                                            placeholder="communications@entity.com"
+                                            placeholder="e.g. billing@company.com"
                                             value={formData.email}
                                             onChange={e => setFormData({ ...formData, email: e.target.value })}
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Primary Telecom</label>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Phone Number</label>
                                         <input
                                             type="tel"
                                             className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all"
-                                            placeholder="+0 000-000-0000"
+                                            placeholder="e.g. +27 82 000 0000"
                                             value={formData.phone}
                                             onChange={e => setFormData({ ...formData, phone: e.target.value })}
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Tax ID / VAT</label>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Tax ID / VAT Number</label>
                                         <input
                                             type="text"
                                             className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all"
-                                            placeholder="Taxation reference"
+                                            placeholder="e.g. 4123456789"
                                             value={formData.taxNumber}
                                             onChange={e => setFormData({ ...formData, taxNumber: e.target.value })}
                                         />
                                     </div>
 
+                                    <div>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Payment Terms (Days)</label>
+                                        <input
+                                            type="number"
+                                            className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all"
+                                            placeholder="30"
+                                            value={formData.paymentTerms}
+                                            onChange={e => setFormData({ ...formData, paymentTerms: parseInt(e.target.value) || 0 })}
+                                        />
+                                    </div>
+
                                     <div className="md:col-span-2">
-                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">HQ Address</label>
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Billing Address</label>
                                         <textarea
                                             className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all resize-none shadow-inner"
                                             rows="3"
-                                            placeholder="Physical location details"
+                                            placeholder="e.g. 123 Main Street, Suite 100, Cape Town, 8001"
                                             value={formData.address}
                                             onChange={e => setFormData({ ...formData, address: e.target.value })}
+                                        ></textarea>
+                                    </div>
+
+                                    <div className="md:col-span-2">
+                                        <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 pl-1">Notes</label>
+                                        <textarea
+                                            className="w-full px-5 py-4 bg-background/50 border border-border/20 rounded-2xl focus:ring-4 focus:ring-primary/10 outline-none text-sm font-bold text-text-main transition-all resize-none shadow-inner"
+                                            rows="2"
+                                            placeholder="Any additional notes about this client..."
+                                            value={formData.notes}
+                                            onChange={e => setFormData({ ...formData, notes: e.target.value })}
                                         ></textarea>
                                     </div>
                                 </div>
@@ -400,14 +451,14 @@ export default function Clients() {
                                     onClick={() => setShowModal(false)}
                                     className="flex-1 py-4 text-text-main font-black uppercase tracking-widest text-[10px] border border-border/50 rounded-2xl hover:bg-slate-800 transition-all active:scale-95"
                                 >
-                                    Abort
+                                    Cancel
                                 </button>
                                 <button
                                     onClick={handleSave}
                                     disabled={!formData.name || !formData.email}
                                     className="flex-[2] py-4 bg-primary text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-blue-600 transition-all shadow-2xl shadow-primary/30 disabled:opacity-20 disabled:cursor-not-allowed glow-blue active:scale-95"
                                 >
-                                    {editingClient ? 'Sync Changes' : 'Confirm Establishment'}
+                                    {editingClient ? 'Save Changes' : 'Add Client'}
                                 </button>
                             </div>
                         </div>
