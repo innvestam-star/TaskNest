@@ -29,6 +29,9 @@ import Clients from './pages/Clients';
 import Products from './pages/Products';
 import Payments from './pages/Payments';
 import BillingReports from './pages/BillingReports';
+import CashFlow from './pages/CashFlow';
+import FinancialReports from './pages/FinancialReports';
+import Marketing from './pages/Marketing';
 
 function App() {
   return (
@@ -57,6 +60,7 @@ function App() {
                   <Route path="/payment/success" element={<PaymentSuccess />} />
                   <Route path="/payment/cancelled" element={<PaymentCancelled />} />
                   <Route path="/booking/setup" element={<BookingSetup />} />
+                  <Route path="/marketing" element={<AdminRoute><Marketing /></AdminRoute>} />
 
                   {/* Project Management Routes */}
                   <Route path="/projects" element={<Projects />} />
@@ -77,7 +81,9 @@ function App() {
                   <Route path="/billing/clients" element={<Clients />} />
                   <Route path="/billing/products" element={<Products />} />
                   <Route path="/billing/payments" element={<Payments />} />
+                  <Route path="/billing/cashflow" element={<CashFlow />} />
                   <Route path="/billing/reports" element={<BillingReports />} />
+                  <Route path="/billing/financial-reports" element={<FinancialReports />} />
                 </Route>
               </Routes>
             </RBACProvider>

@@ -234,7 +234,7 @@ export default function CreateDocument() {
                 status,
                 businessInfo: {
                     name: user?.businessName || '',
-                    logo: user?.businessLogo || '',
+                    logo: user?.businessLogo || '/tamtech-logo.png',
                     address: user?.businessAddress || '',
                     contactPerson: user?.contactPerson || '',
                     contactNumber: user?.contactNumber || '',

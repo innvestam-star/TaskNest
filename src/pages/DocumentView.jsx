@@ -69,7 +69,7 @@ export default function DocumentView() {
     const hasTax = document.items.some(i => (i.taxRate || 0) > 0);
 
     // Prioritize current user profile (most up-to-date business identity)
-    const logoSrc = user?.businessLogo || document.businessInfo?.logo || null;
+    const logoSrc = user?.businessLogo || document.businessInfo?.logo || '/tamtech-logo.png';
     const businessName = user?.businessName || document.businessInfo?.name || 'TaskNest';
     const businessAddress = user?.businessAddress || document.businessInfo?.address || '';
     const contactPerson = user?.contactPerson || document.businessInfo?.contactPerson || '';
@@ -169,27 +169,23 @@ export default function DocumentView() {
                         <div className="flex justify-between items-start mb-10">
                             <div>
                                 {/* Business Logo */}
-                                {logoSrc ? (
-                                    <img
-                                        src={logoSrc}
-                                        alt={businessName}
-                                        className="h-16 w-auto max-w-[220px] object-contain"
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                            const fallback = e.target.nextElementSibling;
-                                            if (fallback) fallback.style.display = 'flex';
-                                        }}
-                                    />
-                                ) : null}
+                                <img
+                                    src={logoSrc}
+                                    alt={businessName}
+                                    className="h-24 w-auto max-w-[280px] object-contain"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        const fallback = e.target.nextElementSibling;
+                                        if (fallback) fallback.style.display = 'flex';
+                                    }}
+                                />
                                 {/* Fallback text logo */}
-                                {!logoSrc && (
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-blue-500/20">
-                                            {businessName[0] || 'T'}
-                                        </div>
-                                        <span className="text-xl font-black text-slate-900 tracking-tight">{businessName}</span>
+                                <div className="items-center gap-3" style={{ display: 'none' }}>
+                                    <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-500/20">
+                                        {businessName[0] || 'T'}
                                     </div>
-                                )}
+                                    <span className="text-xl font-black text-slate-900 tracking-tight">{businessName}</span>
+                                </div>
                             </div>
                             <div className="text-right">
                                 <h1 className="text-3xl font-black text-gray-900 uppercase tracking-wider">{document.type}</h1>
@@ -260,8 +256,19 @@ export default function DocumentView() {
                             </div>
 
                             {/* BILL TO — Client Information */}
-                            <div className="bg-slate-50/80 border border-slate-100 rounded-xl p-5">
-                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Bill To</h3>
+                            <div className="bg-slate-50/80 border border-slate-100 rounded-xl p-5 relative group">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Bill To</h3>
+                                    {(document.status === 'draft' || document.status === 'sent') && (
+                                        <Link
+                                            to={`/invoices/edit/${id}`}
+                                            className="p-1.5 text-slate-300 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-all opacity-0 group-hover:opacity-100 print:hidden"
+                                            title="Edit Client Information"
+                                        >
+                                            <Edit className="w-3.5 h-3.5" />
+                                        </Link>
+                                    )}
+                                </div>
                                 <p className="text-[15px] font-bold text-slate-900 mb-2">{document.clientName}</p>
                                 {document.clientAddress && (
                                     <p className="text-[12px] text-slate-500 whitespace-pre-line leading-relaxed mb-3">{document.clientAddress}</p>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, Calendar, Layout, Sparkles, Settings, CreditCard, Users, FileText, ChevronDown, BarChart3, DollarSign, Package } from 'lucide-react';
+import { CheckCircle, Calendar, Layout, Sparkles, Settings, CreditCard, Users, FileText, ChevronDown, BarChart3, DollarSign, Package, TrendingUp, Megaphone } from 'lucide-react';
 import { useLocation, Link } from 'react-router-dom';
 import { useSubscription } from '../context/SubscriptionContext';
 import { useAuth } from '../context/AuthContext';
@@ -72,6 +72,7 @@ export default function Sidebar() {
                     <span className="ml-auto text-[9px] font-black bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-2 py-0.5 rounded-lg">BIZ</span>
                 </Link>
 
+
                 <div className="mt-10 px-5 py-2 mb-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] opacity-80">Workspace</div>
 
                 <Link to="/projects" className={`flex items-center gap-3 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 ${isActive('/projects')}`}>
@@ -96,11 +97,13 @@ export default function Sidebar() {
                         <div className="ml-5 mt-2 space-y-1 border-l-2 border-slate-800 pl-4 animate-in slide-in-from-left duration-300">
                             {[
                                 { to: '/billing', label: 'Dashboard', icon: Layout },
+                                { to: '/billing/cashflow', label: 'Cash Flow', icon: TrendingUp },
                                 { to: '/billing/quotes', label: 'Quotes', icon: FileText },
                                 { to: '/billing/invoices', label: 'Invoices', icon: FileText },
                                 { to: '/billing/clients', label: 'Clients', icon: Users },
                                 { to: '/billing/products', label: 'Products', icon: Package },
                                 { to: '/billing/payments', label: 'Payments', icon: DollarSign },
+                                { to: '/billing/financial-reports', label: 'Financial Reports', icon: BarChart3 },
                             ].map((item) => (
                                 <Link
                                     key={item.label}
@@ -123,10 +126,17 @@ export default function Sidebar() {
                 </Link>
 
                 {isAdmin && (
-                    <Link to="/admin" className={`flex items-center gap-3 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 ${isActive('/admin')}`}>
-                        <Users className="w-5 h-5" />
-                        Admin
-                    </Link>
+                    <>
+                        <Link to="/admin" className={`flex items-center gap-3 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 ${isActive('/admin')}`}>
+                            <Users className="w-5 h-5" />
+                            Admin Panel
+                        </Link>
+                        <Link to="/marketing" className={`flex items-center gap-3 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 ${isActive('/marketing')}`}>
+                            <Megaphone className="w-5 h-5" />
+                            Marketing
+                            <span className="ml-auto text-[9px] font-black bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-2 py-0.5 rounded-lg">NEW</span>
+                        </Link>
+                    </>
                 )}
 
                 <Link to="/pricing" className={`flex items-center gap-3 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 ${isActive('/pricing')}`}>
